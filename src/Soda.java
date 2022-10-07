@@ -1,6 +1,6 @@
 public class Soda {
 
-    private String sodaName;
+    private final String sodaName;
     private double sodaPrice;
 
     protected Soda(String sodaName, double sodaPrice) {
@@ -8,7 +8,15 @@ public class Soda {
         this.sodaPrice = sodaPrice;
     }
 
-    protected void setChangeValueSoda(double newValueSoda){
+    protected String getSodaName (){
+        return sodaName;
+    }
+
+    protected double getSodaPrice (){
+        return sodaPrice;
+    }
+
+    protected void setValueSoda(double newValueSoda){
         this.sodaPrice = newValueSoda;
     }
 }
