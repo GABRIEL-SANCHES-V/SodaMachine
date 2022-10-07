@@ -1,18 +1,19 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         SodaMachine machine = new SodaMachine();
-        ArrayList<Soda> sodaList = machine.getSodaList();
+        Map<String,Soda> sodaList = machine.getSodaList();
 
-        for (Soda soda : sodaList){
-            System.out.printf("%-13s -> %.2f\n", soda.getSodaName(), soda.getSodaPrice());
+        for (String soda : sodaList.keySet()){
+            System.out.printf("%-13s -> %.2f\n", sodaList.get(soda).getSodaName(), sodaList.get(soda).getSodaPrice());
         }
 
         System.out.println("=================================================");
 
-        for (Soda soda : sodaList) {
-            System.out.printf("%-13s -> %3s\n", soda.getSodaName(), machine.getInventory().get(soda));
+        for (String soda : sodaList.keySet()) {
+            System.out.printf("%-13s -> %3s\n", sodaList.get(soda).getSodaName(), machine.getInventory().get(soda));
         }
 
         System.out.println();

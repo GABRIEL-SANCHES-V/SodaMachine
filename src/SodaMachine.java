@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SodaMachine {
 
-    private final ArrayList<Soda> sodas;
+    private final Map<String,Soda> sodas;
     private final Inventory inventory;
     private double currentCredit;
     private final double changeBalance;
@@ -15,14 +16,15 @@ public class SodaMachine {
         this.changeBalance = 10.00;
     }
 
-    private ArrayList<Soda> getSodas() {
+    private Map<String,Soda> getSodas() {
 
-        ArrayList<Soda> newSodas = new ArrayList<>();
-        newSodas.add(new Soda("Coca-Cola", 5.50));
-        newSodas.add(new Soda("Pepsi", 5.00));
-        newSodas.add(new Soda("Guaraná", 5.00));
-        newSodas.add(new Soda("Sprite", 5.00));
-        newSodas.add(new Soda("Fanta laranja", 4.50));
+        Map<String,Soda> newSodas = new HashMap<>();
+
+        newSodas.put("Coca-Cola", new Soda("Coca-Cola", 4.50));
+        newSodas.put("Pespi", new Soda("Pepsi", 4.00));
+        newSodas.put("Guaraná", new Soda("Guaraná", 4.00));
+        newSodas.put("Sprite", new Soda("Sprite", 4.00));
+        newSodas.put("Fanta laranja", new Soda("Fanta laranja", 3.50));
 
         return newSodas;
     }
@@ -31,13 +33,14 @@ public class SodaMachine {
         return currentCredit;
     }
 
-    public ArrayList<Soda> getSodaList() {
+    public Map<String,Soda> getSodaList() {
         return sodas;
     }
 
-    public Map<Soda,Integer> getInventory() { // para teste
+    public Map<String,Integer> getInventory() { // para teste
         return inventory.getSodaInventory();
     }
+
     public double getChangeBalance() { // para teste
         return changeBalance;
     }
