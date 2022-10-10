@@ -57,7 +57,7 @@ public class SodaMachine {
             if(machine.inventory.getSodaInventory().get(sodaName) > 0) {
 
                 this.changeBalance += currentCredit;
-                this.inventory.withdrawal(sodaName, machine.inventory);
+                this.inventory.withdrawal(sodaName, machine.inventory, "Sale");
                 this.currentCredit -= machine.getSodaList().get(sodaName).getSodaPrice();
                 this.changeBalance -= currentCredit;
                 System.out.printf("Troco: R$ %.2f\n", currentCredit);
@@ -68,6 +68,20 @@ public class SodaMachine {
 
         } else {
             System.out.printf("Saldo insuficiente\nTroco: R$ %.2f\n", currentCredit);
+        }
+    }
+
+    public void cancelSale(String sodaName, SodaMachine machine){
+
+        this.changeBalance += currentCredit;
+        this.inventory.withdrawal(sodaName, machine.inventory, "Cancel");
+        if(machine.getSodaList().get(sodaName).getSodaPrice() >= changeBalance) {
+
+            System.out.printf("Troco: R$ %.2f\n", currentCredit);
+            this.changeBalance -= currentCredit;
+
+        } else {
+            System.out.println("Saldo insuficiente para troco.");
         }
     }
 
