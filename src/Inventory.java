@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
-    private final Map<String,Integer> inventory;
+    private Map<String,Integer> inventory;
 
     protected Inventory(Map<String,Soda> sodas, int sodaQuantity){
         this.inventory = getInventory(sodas, sodaQuantity);
@@ -21,6 +20,12 @@ public class Inventory {
 
     protected Map<String,Integer> getSodaInventory(){
         return inventory;
+    }
+
+    protected void withdrawal(String sodaName, Inventory inventory){
+        int quantityInInventory = inventory.getSodaInventory().get(sodaName);
+        quantityInInventory--;
+        this.inventory.replace(sodaName,quantityInInventory);
     }
 
 }

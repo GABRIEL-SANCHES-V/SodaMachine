@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +6,7 @@ public class SodaMachine {
     private final Map<String,Soda> sodas;
     private final Inventory inventory;
     private double currentCredit;
-    private final double changeBalance;
+    private  double changeBalance;
 
     public SodaMachine() {
         this.sodas = getSodas();
@@ -41,18 +40,35 @@ public class SodaMachine {
         return inventory.getSodaInventory();
     }
 
-    public double getChangeBalance() { // para teste
+    private double getChangeBalance() { // para teste
         return changeBalance;
     }
 
-    public void addCurrentCredit(double value) {
-        if(value == 0.1 || value == 0.25 || value == 0.5 || value ==  1.00) {
-            this.currentCredit = currentCredit + value;
+    public void addCurrentCredit(int quantityOf10, int quantityOf25, int quantityOf50, int quantityOf100) {
+        this.currentCredit += (quantityOf10 * 0.1);
+        this.currentCredit += (quantityOf25 * 0.25);
+        this.currentCredit += (quantityOf50 * 0.5);
+        this.currentCredit += (quantityOf100);
+    }
+
+    public void sale(String sodaName, SodaMachine machine){
+        if(machine.getSodaList().get(sodaName).getSodaPrice() > machine.currentCredit) {
+
+            if(machine.inventory.getSodaInventory().get(sodaName) > 0) {
+
+                this.changeBalance += currentCredit;
+                this.inventory.withdrawal(sodaName, machine.inventory);
+                this.currentCredit -= machine.getSodaList().get(sodaName).getSodaPrice();
+                this.changeBalance -= currentCredit;
+                System.out.printf("Troco: R$ %.2f\n", currentCredit);
+
+            } else {
+                System.out.println("Refrigerante em falta.");
+            }
 
         } else {
-            System.out.println("Valor inválido!");
+            System.out.printf("Saldo insuficiente\nTroco: R$ %.2f\n", currentCredit);
         }
-
     }
 
 
