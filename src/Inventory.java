@@ -22,15 +22,15 @@ public class Inventory {
         return inventory;
     }
 
-    protected void withdrawal(String sodaName, Inventory inventory, String module){
+    protected void withdrawal(String sodaName, Inventory inventory, int sodaQuantity, String module){
         if (module.equals("Sale")){
             int quantityInInventory = inventory.getSodaInventory().get(sodaName);
-            quantityInInventory--;
+            quantityInInventory -= sodaQuantity;
             this.inventory.replace(sodaName,quantityInInventory);
 
         } else if (module.equals("Cancel")){
             int quantityInInventory = inventory.getSodaInventory().get(sodaName);
-            quantityInInventory++;
+            quantityInInventory += sodaQuantity;
             this.inventory.replace(sodaName,quantityInInventory);
         }
     }
